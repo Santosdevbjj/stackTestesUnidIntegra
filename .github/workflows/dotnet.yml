@@ -1,4 +1,4 @@
-name: .NET Build and Test
+name: .NET Build, Test & Coverage
 
 on:
   push:
@@ -7,26 +7,37 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  build-test-coverage:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 🔄 Checkout do código
+    - name: Checkout do código
       uses: actions/checkout@v3
 
-    - name: 🧰 Instalar .NET SDK
+    - name: Instalar .NET SDK
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0.x'
 
-    - name: 📦 Restaurar dependências
+    - name: Restaurar dependências
       run: dotnet restore
 
-    - name: 🛠️ Compilar solução
+    - name: Compilar solução
       run: dotnet build --no-restore
 
-    - name: 🧪 Executar testes de unidade
-      run: dotnet test tests/VaquinhaOnline.UnitTests/VaquinhaOnline.UnitTests.csproj --no-build --verbosity normal
+    - name: Testes com cobertura (Unidade)
+      run: dotnet test tests/VaquinhaOnline.UnitTests/VaquinhaOnline.UnitTests.csproj --collect:"XPlat Code Coverage"
 
-    - name: 🧪 Executar testes de integração
-      run: dotnet test tests/VaquinhaOnline.IntegrationTests/VaquinhaOnline.IntegrationTests.csproj --no-build --verbosity normal
+    - name: Testes com cobertura (Integração)
+      run: dotnet test tests/VaquinhaOnline.IntegrationTests/VaquinhaOnline.IntegrationTests.csproj --collect:"XPlat Code Coverage"
+
+    - name: Gerar relatório de cobertura
+      run: |
+        dotnet tool install -g dotnet-reportgenerator-globaltool
+        reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coverage-report -reporttypes:Html
+
+    - name: Publicar relatório como artefato
+      uses: actions/upload-artifact@v3
+      with:
+        name: cobertura-relatorio
+        path: coverage-report
