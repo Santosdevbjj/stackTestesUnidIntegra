@@ -17,24 +17,27 @@ Veja na teoria e na prática os principais conceitos de testes para aumentar a q
 
 ---
 
+# 🧪 Stack de Testes para Projeto .NET de Crowdfunding
 
-
-
-
-`markdown
-
-🧪 Stack de Testes para Projeto .NET de Crowdfunding
-
-![.NET](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
-![C#](https://learn.microsoft.com/en-us/dotnet/csharp/)
-![Build Status](https://github.com/Santosdevbjj/stackTestesUnidIntegra/actions)
-![License](LICENSE)
+[![.NET](https://img.shields.io/badge/.NET-8.0-blueviolet)](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+[![C#](https://img.shields.io/badge/C%23-12.0-green)](https://learn.microsoft.com/en-us/dotnet/csharp/)
+[![Build Status](https://github.com/Santosdevbjj/stackTestesUnidIntegra/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Santosdevbjj/stackTestesUnidIntegra/actions)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 
 Este projeto implementa uma stack completa de testes (unidade, integração e automatizados) para uma aplicação de crowdfunding desenvolvida em .NET 8 com C# 12, utilizando a arquitetura MVC. O objetivo é garantir qualidade, segurança e confiabilidade nas entregas.
 
 ---
 
-📦 Estrutura do Projeto
+## 📦 Estrutura do Projeto
+
+
+
+<img width="1080" height="1095" alt="Screenshot_20251015-114047" src="https://github.com/user-attachments/assets/01852908-f643-4197-96d4-cc7f27b73519" />
+
+
+
+
+
 
 `
 stackTestesUnidIntegra/
