@@ -19,10 +19,8 @@ namespace VaquinhaOnline.IntegrationTests.Controllers
         public async Task Get_Donations_Should_Return_OK()
         {
             var response = await _client.GetAsync("/donations");
-
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
-
             Assert.Contains("Doações", content);
         }
 
@@ -36,7 +34,6 @@ namespace VaquinhaOnline.IntegrationTests.Controllers
             });
 
             var response = await _client.PostAsync("/donations", formData);
-
             Assert.Equal(System.Net.HttpStatusCode.Redirect, response.StatusCode);
         }
     }
