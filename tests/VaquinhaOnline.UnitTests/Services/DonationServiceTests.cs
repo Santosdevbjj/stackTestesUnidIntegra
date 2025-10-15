@@ -20,20 +20,14 @@ namespace VaquinhaOnline.UnitTests.Services
         [Fact]
         public void Should_Add_Donation_When_Valid()
         {
-            // Arrange
             var donation = new Donation { Name = "Sergio", Amount = 100 };
-
-            // Act
             _service.ProcessDonation(donation);
-
-            // Assert
             _repositoryMock.Verify(r => r.Add(donation), Times.Once);
         }
 
         [Fact]
         public void Should_Throw_Exception_When_Donation_Is_Null()
         {
-            // Act & Assert
             Assert.Throws<ArgumentNullException>(() => _service.ProcessDonation(null));
         }
     }
