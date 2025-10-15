@@ -19,7 +19,7 @@ Veja na teoria e na prática os principais conceitos de testes para aumentar a q
 ---
 
 
-ggg# 🧪 Stack de Testes para Projeto .NET de Crowdfunding
+# 🧪 Stack de Testes para Projeto .NET de Crowdfunding
 
 [![.NET](https://img.shields.io/badge/.NET-8.0-blueviolet)](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 [![C#](https://img.shields.io/badge/C%23-12.0-green)](https://learn.microsoft.com/en-us/dotnet/csharp/)
