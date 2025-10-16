@@ -26,20 +26,26 @@ jobs:
       run: dotnet format --verify-no-changes
 
     - name: 🛠️ Compilar solução
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build --configuration Release
 
     - name: 🧪 Testes de Unidade com cobertura
-      run: dotnet test tests/VaquinhaOnline.UnitTests/VaquinhaOnline.UnitTests.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
+      run: dotnet test tests/VaquinhaOnline.UnitTests/VaquinhaOnline.UnitTests.csproj --configuration Release --collect:"XPlat Code Coverage"
 
     - name: 🧪 Testes de Integração com cobertura
-      run: dotnet test tests/VaquinhaOnline.IntegrationTests/VaquinhaOnline.IntegrationTests.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
+      run: dotnet test tests/VaquinhaOnline.IntegrationTests/VaquinhaOnline.IntegrationTests.csproj --configuration Release --collect:"XPlat Code Coverage"
 
     - name: 📊 Instalar ReportGenerator
       run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
     - name: 📊 Gerar relatório de cobertura
       run: |
-        reportgenerator -reports:"**/coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:Html
+        reportgenerator \
+          -reports:"**/coverage.cobertura.xml" \
+          -targetdir:"coverage-report" \
+          -reporttypes:HtmlInline_AzurePipelines;Cobertura \
+          -assemblyfilters:+VaquinhaOnline* \
+          -classfilters:-*.Tests \
+          -rules:+LineCoverage>80;+BranchCoverage>75;+MethodCoverage>70
 
     - name: 📁 Publicar relatório como artefato
       uses: actions/upload-artifact@v4
