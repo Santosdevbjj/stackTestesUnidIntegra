@@ -6,11 +6,11 @@ using VaquinhaOnline;
 
 namespace VaquinhaOnline.IntegrationTests.Controllers
 {
-    public class DonationControllerTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class DonationControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly HttpClient _client;
 
-        public DonationControllerTests(WebApplicationFactory<Startup> factory)
+        public DonationControllerTests(WebApplicationFactory<Program> factory)
         {
             _client = factory.CreateClient();
         }
