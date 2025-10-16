@@ -11,33 +11,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout do código
+    - name: 🔄 Checkout do código
       uses: actions/checkout@v3
 
-    - name: Instalar .NET SDK
+    - name: 🧰 Instalar .NET SDK
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0.x'
 
-    - name: Restaurar dependências
+    - name: 📦 Restaurar dependências
       run: dotnet restore
 
-    - name: Compilar solução
-      run: dotnet build --no-restore
+    - name: 🎨 Validação de estilo com dotnet format
+      run: dotnet format --verify-no-changes
 
-    - name: Testes com cobertura (Unidade)
-      run: dotnet test tests/VaquinhaOnline.UnitTests/VaquinhaOnline.UnitTests.csproj --collect:"XPlat Code Coverage"
+    - name: 🛠️ Compilar solução
+      run: dotnet build --no-restore --configuration Release
 
-    - name: Testes com cobertura (Integração)
-      run: dotnet test tests/VaquinhaOnline.IntegrationTests/VaquinhaOnline.IntegrationTests.csproj --collect:"XPlat Code Coverage"
+    - name: 🧪 Testes de Unidade com cobertura
+      run: dotnet test tests/VaquinhaOnline.UnitTests/VaquinhaOnline.UnitTests.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
 
-    - name: Gerar relatório de cobertura
+    - name: 🧪 Testes de Integração com cobertura
+      run: dotnet test tests/VaquinhaOnline.IntegrationTests/VaquinhaOnline.IntegrationTests.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
+
+    - name: 📊 Instalar ReportGenerator
+      run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+    - name: 📊 Gerar relatório de cobertura
       run: |
-        dotnet tool install -g dotnet-reportgenerator-globaltool
-        reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coverage-report -reporttypes:Html
+        reportgenerator -reports:"**/coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:Html
 
-    - name: Publicar relatório como artefato
-      uses: actions/upload-artifact@v3
+    - name: 📁 Publicar relatório como artefato
+      uses: actions/upload-artifact@v4
       with:
         name: cobertura-relatorio
         path: coverage-report
