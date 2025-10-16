@@ -22,7 +22,7 @@ jobs:
     - name: 📦 Restaurar dependências
       run: dotnet restore
 
-    - name: 🎨 Validação de estilo com dotnet format
+      name: 🎨 Validação de estilo com dotnet format
       run: dotnet format --verify-no-changes
 
     - name: 🛠️ Compilar solução
