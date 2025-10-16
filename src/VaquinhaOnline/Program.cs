@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using VaquinhaOnline.Services;
 using VaquinhaOnline.Repositories;
+using VaquinhaOnline.Services;
 
 namespace VaquinhaOnline
 {
